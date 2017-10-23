@@ -8,7 +8,9 @@ class Pin
         uint8_t nr;
         int dir;
         int state;
-        void set();
+        void set(int st);
         uint8_t get();
         void changeDir();
+        void setInput();
+        void setOutput();
 };

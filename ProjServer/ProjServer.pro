@@ -11,7 +11,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     bcm2835_stub.cpp \
-    blink.c \
     pin.cpp
 
 HEADERS += \
