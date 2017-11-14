@@ -1,13 +1,14 @@
 #include<pin.h>
-#include <bcm2835.h>
-#include <stdio.h>
+#include<bcm2835.h>
+#include<stdio.h>
 #include<pwm.h>
+#include<spi.h>
 #define PIN_OUT RPI_GPIO_P1_11 //led
 #define PIN_IN RPI_GPIO_P1_15 //buton
 #define PWM_CHANNEL 0
 int main(int argc, char **argv)
 {
-    bcm2835_set_debug(1);
+    /*bcm2835_set_debug(1);
     Pin *p = new Pin(PIN_IN, 0, 0);
     Pin *pp= new Pin(PIN_OUT, 1, 0);
     p->setInput();
@@ -44,6 +45,12 @@ int main(int argc, char **argv)
         delay(100);
         pp->set(0);
     }
+    */
+    bcm2835_set_debug(1);
+    Spi *spi = new Spi(BCM2835_SPI_BIT_ORDER_MSBFIRST, BCM2835_SPI_MODE0, BCM2835_SPI_CLOCK_DIVIDER_65536, BCM2835_SPI_CS0, LOW);
+    uint8_t send_data = 0x23;
+    printf("Sent to SPI: 0x%02X. Read back from SPI: 0x%02X.\n", send_data, spi->transfer(send_data));
+
     return 0;
 
 }
